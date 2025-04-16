@@ -2,8 +2,11 @@ from flask import Flask, request, jsonify
 import os
 import requests
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:*"])
+
 load_dotenv()
 API_KEY = os.getenv("WEATHER_API_KEY")
 
@@ -35,5 +38,6 @@ def get_weather():
 
     return jsonify(response.json())
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5050, debug=True)
